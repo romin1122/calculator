@@ -127,7 +127,7 @@ button{
 
 button:active
 {
-	box-shadow: 0 0 .3em #2a7dad inset;
+	box-shadow: 0 0 .3em #4085b5 inset;
 }
 
 @media (max-width: 700px)
@@ -137,4 +137,13 @@ button:active
 		height: 100%;
 		width: 80%;
 	}
+}
+
+button:focus
+{
+	outline: none;
+	border: none;
+}
+button::-moz-focus-inner{
+	border:none;
 }

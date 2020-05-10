@@ -63,59 +63,77 @@ let mixer=(arr, pos, value)=>{
 }
 
 
-
-let add = (arr)=>{
-	for(let i=0;i<arr.length;i++){
-		if(arr[i]=='+'){
-			mixer(arr, i-1, Number(arr[i-1]) + Number(arr[i+1]));
-			add(arr);
-			return;
-		}
-	}
+let add = (arr, i)=>{
+	mixer(arr, i-1, Number(arr[i-1]) + Number(arr[i+1]));
 }
 
 
-let subtract = (arr)=>{
-	for(let i=0;i<arr.length;i++){
-		if(arr[i]=='-'){
-			mixer(arr, i-1, Number(arr[i-1]) - Number(arr[i+1]));
-			subtract(arr);
-			return;
-		}
-	}
+let subtract = (arr, i)=>{
+	
+	mixer(arr, i-1, Number(arr[i-1]) - Number(arr[i+1]));
+			
 }
 
 
-let multiply = (arr)=>{
-	for(let i=0;i<arr.length;i++){
-		if(arr[i]=='×'){
-			mixer(arr,i-1, Number(arr[i-1]) * Number(arr[i+1]));
-			multiply(arr);
-			return;
-		}
-	}
+let multiply = (arr, i)=>{
+	mixer(arr,i-1, Number(arr[i-1]) * Number(arr[i+1]));
 }
 
 
-let divide = (arr)=>{
-	for(let i=0;i<arr.length;i++){
-		if(arr[i]=='÷'){
-			mixer(arr, i-1, Number(arr[i-1]) / Number(arr[i+1]));
-			divide(arr);
-			return;
-		}
-	}
+let divide = (arr, i)=>{
+	mixer(arr, i-1, Number(arr[i-1]) / Number(arr[i+1]));
 }
 
 
 
 let operate=(arr)=>{                    //BODMAS=>Brackets > Of > Division > Multiplication > Addition > Subtraction............
-	
-	divide(arr);
-	multiply(arr);
-	add(arr);
-	subtract(arr);
-	
+	let empty = false;
+	while (!empty)
+	{
+		for (let i = 0; i < arr.length; i++)
+		{
+			if (i == arr.length - 1)
+			{
+				empty = true;
+			}
+
+			if (arr[i] == "÷")
+			{
+				divide(arr, i);
+				break;
+			}
+			else if (arr[i] == "×")
+			{
+				multiply(arr, i);
+				break;
+			}
+			
+		}
+	}
+
+	empty = false;
+	while (!empty)
+	{
+		for (let i = 0; i < arr.length; i++)
+		{
+			if (i == arr.length - 1)
+			{
+				empty = true;
+			}
+
+			if (arr[i] == "+")
+			{
+				add(arr, i);
+				break;
+			}
+			else if (arr[i] == "-")
+			{
+				subtract(arr, i);
+				break;
+			}
+			
+		}
+	}
 }
 
 let resultMaker=()=>{
